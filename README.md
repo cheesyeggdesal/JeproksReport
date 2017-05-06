@@ -39,7 +39,7 @@ ReportTemplate productListTemplate()
 }
 
 //create pdf report using pdfsharpwriter
-void WritePDFReport()
+void WriteExcelReport()
 {
     var reportfilename = ".\\output_simplepdfsharpreport.pdf";
 
@@ -70,3 +70,9 @@ void WriteExcelReport()
     }
 }
 ```
+
+# Screenshots
+## PDFWriter
+![image](https://cloud.githubusercontent.com/assets/3628837/25771398/7d94e3c6-3282-11e7-852c-2c24966cbbe9.png)
+## ExcelWriter
+![image](https://cloud.githubusercontent.com/assets/3628837/25771405/a07569ce-3282-11e7-9e00-2ff605b8e3b1.png)
