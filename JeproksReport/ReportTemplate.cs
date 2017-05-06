@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace JeproksReport
 {
@@ -12,9 +11,17 @@ namespace JeproksReport
     {
         public PageOptions PageOptions { get; set; }
         
+        
         public List<ReportColumn> Columns { get; set; }
 
-        public List<ReportSection> Sections { get; set; }
+        private List<ReportSection> _sections;
+        public List<ReportSection> Sections
+        {
+            get
+            {
+                return this._sections;
+            }
+        }
 
         public ReportTemplate()
         {
@@ -30,27 +37,9 @@ namespace JeproksReport
 
         public ReportSection AddSection(ReportSection section)
         {
-            if (this.Sections == null) this.Sections = new List<ReportSection>();
-            this.Sections.Add(section);
+            if (this._sections == null) this._sections = new List<ReportSection>();
+            this._sections.Add(section);
             return section;
-        }
-
-        public void Save(string fileName)
-        {
-            using (var streamwriter = new StreamWriter(fileName))
-            {
-                var serializer = new XmlSerializer(typeof(ReportTemplate));
-                serializer.Serialize(streamwriter, this);
-            };
-        }
-
-        public static ReportTemplate Load(string filename)
-        {
-            using (var reader = new StreamReader(filename))
-            {
-                var serializer = new XmlSerializer(typeof(ReportTemplate));
-                return (ReportTemplate)serializer.Deserialize(reader);
-            }
         }
     }
 }

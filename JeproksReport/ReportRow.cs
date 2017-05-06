@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace JeproksReport
 {
     public class ReportRow
     {
-        [XmlAttribute]
         public string BackColor { get; set; }
 
-        [XmlArrayItem(typeof(DataField))]
-        [XmlArrayItem(typeof(Image))]
-        [XmlArrayItem(typeof(Label))]
-        //[XmlArrayItem(typeof(TextBox))]
-        //[XmlArrayItem(typeof(ReportObject), ElementName = "Rectangle")]
-        public List<ReportObject> Objects { get; set; }
-        public bool ShouldSerializeObjects()
+        private List<ReportObject> _objects;
+        public IReadOnlyCollection<ReportObject> Objects
         {
-            return this.Objects.Count > 0;
-        }
-        public ReportRow()
-        {
-            this.Objects = new List<ReportObject>();
+            get
+            {
+                return this._objects;
+            }
         }
 
         public ReportRow ParseDataFields(object datarow)
@@ -75,8 +68,64 @@ namespace JeproksReport
             return new ReportRow()
             {
                 BackColor = this.BackColor,
-                Objects = newobjs.ToList()
+                _objects = newobjs.ToList()
             };
+        }
+        public T Add<T>(T reportobj) where T : ReportObject
+        {
+            if (this._objects == null) this._objects = new List<ReportObject>();
+            this._objects.Add(reportobj);
+            return reportobj;
+        }
+        public Label AddLabel()
+        {
+            return this.AddLabel(new Label());
+        }
+        public Label AddLabel(Label label)
+        {
+            this.Add(label);
+            return label;
+        }
+        public Label AddLabel(string value)
+        {
+            return this.AddLabel(new Label() { Value = value });
+        }
+        public Label AddLabel(string value, Font font, string color = "Black", string backcolor = null, StringAlignment alignment = StringAlignment.Near)
+        {
+            return this.AddLabel(new Label()
+            {
+                Alignment = alignment,
+                Value = value,
+                FontSize = font.Size,
+                FontFamily = font.FontFamily.Name,
+                Color = color,
+                BackColor = backcolor
+            });
+        }
+        
+        public DataField AddDataField(string field, string format = null, string color = "Black", string backcolor = null, StringAlignment alignment = StringAlignment.Near)
+        {
+            return this.Add(new DataField()
+            {
+                Alignment = alignment,
+                Field = field,
+                Format = format,
+                Color = color,
+                BackColor = backcolor
+            });
+        }
+        public DataField AddDataField(string field, Font font, string format = null, string color = "Black", string backcolor = null, StringAlignment alignment = StringAlignment.Near)
+        {
+            return this.Add(new DataField()
+            {
+                Alignment = alignment,
+                Field = field,
+                Format = format,
+                FontSize = font.Size,
+                FontFamily = font.FontFamily.Name,
+                Color = color,
+                BackColor = backcolor
+            });
         }
     }
 }

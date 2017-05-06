@@ -4,13 +4,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace JeproksReport
 {
     public class ReportObject
     {
-        [XmlAttribute]
         public string BackColor { get; set; }
         public Borders Borders { get; set; }
         public bool ShouldSerializeBorders()
@@ -64,15 +62,8 @@ namespace JeproksReport
     }
     public class Border
     {
-        [XmlAttribute]
         public string Color { get; set; }
-        public bool ShouldSerializeColor()
-        {
-            return this.Color != DefaultValues.COLOR_BORDER;
-        }
-        [XmlAttribute]
         public bool Visible { get; set; }
-        [XmlAttribute]
         public double Width { get; set; }
 
         public Border()
@@ -83,43 +74,12 @@ namespace JeproksReport
 
     public class TextBase : ReportObject
     {
-        [XmlAttribute]
         public string FontFamily { get; set; }
-        public bool ShouldSerializeFontFamily()
-        {
-            return FontFamily != DefaultValues.FONT_FAMILY;
-        }
-        [XmlAttribute]
         public double FontSize { get; set; }
-        public bool ShouldSerializeFontSize()
-        {
-            return this.FontSize != DefaultValues.FONT_SIZE;
-        }
-        [XmlAttribute]
         public bool Bold { get; set; }
-        public bool ShouldSerializeBold()
-        {
-            return this.Bold;
-        }
-        [XmlAttribute]
         public bool Italic { get; set; }
-        public bool ShouldSerializeItalic()
-        {
-            return this.Italic;
-        }
-        [XmlAttribute]
         public string Color { get; set; }
-        public bool ShouldSerializeColor()
-        {
-            return this.Color != DefaultValues.COLOR_TEXT;
-        }
-
-        [XmlAttribute]
         public StringAlignment Alignment { get; set; }
-        public bool ShouldSerializeAlignment()
-        {
-            return this.Alignment != StringAlignment.Near;
-        }
 
         public TextBase()
         {
@@ -132,21 +92,28 @@ namespace JeproksReport
 
     public class Label : TextBase
     {
-        [XmlText]
         public string Value { get; set; }
+
+        public Label() { }
+        public Label(string value, Font font, StringAlignment alignment = StringAlignment.Near)
+        {
+            this.Value = value;
+            this.FontSize = font.Size;
+            this.FontFamily = font.FontFamily.Name;
+            this.Bold = font.Bold;
+            this.Italic = font.Italic;
+            this.Alignment = alignment;
+        }
     }
 
     public class DataField : TextBase
     {
-        [XmlAttribute]
         public string Field { get; set; }
-        [XmlAttribute]
         public string Format { get; set; }
     }
 
     public class Image : ReportObject
     {
-        [XmlAttribute]
         public string Src { get; set; }
     }
 }

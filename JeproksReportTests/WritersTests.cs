@@ -25,77 +25,29 @@ namespace JeproksReportTests
 
             var header = template.AddSection();
             var currentrow = header.AddRow();
-            currentrow.Objects.Add(new Label()
-            {
-                Bold = true,
-                Value = "Product List",
-                FontSize = 12
-            });
+            currentrow.AddLabel("Product List", new Font("Arial", 12, FontStyle.Bold));
+            
             currentrow = header.AddRow();
-            currentrow.Objects.Add(new Label()
-            {
-                Value = string.Format("Date Printed : ")
-            });
-            currentrow.Objects.Add(new Label()
-            {
-                Value = string.Format("{0:MMM dd, yyyy}", DateTime.Now)
-            });
-            header.AddRow().Objects.Add(new Label() { Value = " " }); //blank row
+            currentrow.AddLabel("Date Printed :");
+            currentrow.AddLabel(string.Format("{0:MMM dd, yyyy}", DateTime.Now));
+
+            header.AddRow().AddLabel(" "); //blank row
+
+            Font tableheaderfont = new Font("Arial", 9, FontStyle.Bold);
             currentrow = header.AddRow();
-            currentrow.Objects.Add(new Label()
-            {
-                Bold = true,
-                BackColor = "#0063B1",
-                Color = "White",
-                Value = "Product Id"
-            });
-            currentrow.Objects.Add(new Label()
-            {
-                Bold = true,
-                BackColor = "#0063B1",
-                Color = "White",
-                Value = "Product Name"
-            });
-            currentrow.Objects.Add(new Label()
-            {
-                Alignment = System.Drawing.StringAlignment.Far,
-                Bold = true,
-                BackColor = "#0063B1",
-                Color = "White",
-                Value = "Quantity "
-            });
-            currentrow.Objects.Add(new Label()
-            {
-                Alignment = System.Drawing.StringAlignment.Far,
-                Bold = true,
-                BackColor = "#0063B1",
-                Color = "White",
-                Value = "Price "
-            });
+            currentrow.AddLabel("Product Id", tableheaderfont, "White", "#0063B1");
+            currentrow.AddLabel("Product Name", tableheaderfont, "White", "#0063B1");
+            currentrow.AddLabel("Quantity", tableheaderfont, "White", "#0063B1", StringAlignment.Far);
+            currentrow.AddLabel("Price", tableheaderfont, "White", "#0063B1", StringAlignment.Far);
 
             var details = template.AddSection();
             details.DataSource = "products";
 
             currentrow = details.AddRow();
-            currentrow.Objects.Add(new DataField()
-            {
-                Field = "ProductId"
-            });
-            currentrow.Objects.Add(new DataField()
-            {
-                Field = "ProductName"
-            });
-            currentrow.Objects.Add(new DataField()
-            {
-                Alignment = StringAlignment.Far,
-                Field = "Quantity"
-            });
-            currentrow.Objects.Add(new DataField()
-            {
-                Alignment = StringAlignment.Far,
-                Field = "Price",
-                Format = "N2"
-            });
+            currentrow.AddDataField("ProductId");
+            currentrow.AddDataField("ProductName");
+            currentrow.AddDataField("Quantity", format: "N2", alignment: StringAlignment.Far);
+            currentrow.AddDataField("Price", format: "N2", alignment: StringAlignment.Far);
             return template;
         }
 
