@@ -87,7 +87,7 @@ ReportTemplate productListTemplate()
 }
 
 //create pdf report using pdfsharpwriter
-void WritePDFReport()
+void WriteExcelReport()
 {
 	var reportfilename = ".\\output_simplepdfsharpreport.pdf";
 
@@ -103,9 +103,9 @@ void WritePDFReport()
 }
 
 //create excel report using excelwriter
-void WritePDFReport()
+void WriteExcelReport()
 {
-	var reportfilename = ".\\output_simpleexcelreport.xlsx";
+    var reportfilename = ".\\output_simpleexcelreport.xlsx";
 
     var datasource = new Dictionary<string, IEnumerable<object>>();
     datasource.Add("products", this.GetProductList());
