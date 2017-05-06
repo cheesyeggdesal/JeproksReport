@@ -192,23 +192,7 @@ namespace JeproksReport.PDFSharp
 
                         var brush = new XSolidBrush(getColorFromHtml(textbase.Color));
                         XStringFormat stringFormat = new XStringFormat();
-                        //stringFormat.Alignment = XStringAlignment.Near;
-                        ////
-                        // Only TopLeft alignment is currently implemented.
-                        ////
-                        //switch ((obj as TextBase).Alignment)
-                        //{
-                        //    case System.Drawing.StringAlignment.Center:
-                        //        stringFormat.Alignment = XStringAlignment.Center;
-                        //        break;
-                        //    case System.Drawing.Strin•gAlignment.Far:
-                        //        stringFormat.Alignment = XStringAlignment.Far;
-                        //        break;
-                        //    case System.Drawing.StringAlignment.Near:
-                        //    default:
-                        //        stringFormat.Alignment = XStringAlignment.Near;
-                        //        break;
-                        //}
+                        
                         if (obj is Label)
                         {
                             var label = obj as Label;
@@ -223,7 +207,19 @@ namespace JeproksReport.PDFSharp
                             }
 
                             XTextFormatter textFormatter = new XTextFormatter(this._currentGraphics);
-                            textFormatter.DrawString(label.Value ?? "", font, brush, rect, stringFormat);
+                            switch (label.Alignment)
+                            {
+                                case System.Drawing.StringAlignment.Near:
+                                    textFormatter.Alignment = XParagraphAlignment.Left;
+                                    break;
+                                case System.Drawing.StringAlignment.Center:
+                                    textFormatter.Alignment = XParagraphAlignment.Center;
+                                    break;
+                                case System.Drawing.StringAlignment.Far:
+                                    textFormatter.Alignment = XParagraphAlignment.Right;
+                                    break;
+                            }
+                            textFormatter.DrawString(label.Value ?? "", font, brush, rect, XStringFormats.TopLeft);
                         }
                     }
                     this._currentXPos += columnWidth;
