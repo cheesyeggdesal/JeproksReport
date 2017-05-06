@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using JeproksReport.ExcelWriter;
 
 namespace JeproksReportTests
 {
@@ -120,6 +121,22 @@ namespace JeproksReportTests
 
             var template = this.generateSimpleTemplate();
             var writer = new PdfSharpWriter();
+            using (var file = File.Create(reportfilename))
+            {
+                writer.Write(template, file, datasource);
+            }
+        }
+
+        [TestMethod]
+        public void should_write_simple_excel_report()
+        {
+            var reportfilename = ".\\output_simpleexcelreport.xlsx";
+
+            var datasource = new Dictionary<string, IEnumerable<object>>();
+            datasource.Add("products", this.GetProductList());
+
+            var template = this.generateSimpleTemplate();
+            var writer = new ExcelWriter();
             using (var file = File.Create(reportfilename))
             {
                 writer.Write(template, file, datasource);

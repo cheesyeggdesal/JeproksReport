@@ -56,13 +56,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExcelWriter\ExcelWriter.csproj">
+      <Project>{138d71e0-b2ae-45b3-8c70-aa7659da978a}</Project>
+      <Name>ExcelWriter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JeproksReport\JeproksReport.csproj">
       <Project>{ef1f1fab-e30c-4c47-b26a-8261cdd8c28e}</Project>
       <Name>JeproksReport</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PDFsharp\PDFsharp.csproj">
+    <ProjectReference Include="..\PDFsharp\PDFSharpWriter.csproj">
       <Project>{15e7bee9-25c8-4709-b559-9451916c9646}</Project>
-      <Name>PDFsharp</Name>
+      <Name>PDFSharpWriter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

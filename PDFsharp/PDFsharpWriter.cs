@@ -59,57 +59,7 @@ namespace JeproksReport.PDFSharp
                 {
                     foreach (var datarow in this._datasource[section.DataSource])
                     {
-                        RenderRows(section.Rows.Select(row =>
-                        {
-                            var newobjs = row.Objects.Select(obj =>
-                            {
-                                if (obj is DataField)
-                                {
-                                    var datafield = obj as DataField;
-
-                                    string value = "";
-
-                                    var prop = datarow.GetType().GetProperty(datafield.Field);
-                                    var datavalue = prop.GetValue(datarow);
-
-                                    if (string.IsNullOrEmpty(datafield.Format))
-                                    {
-                                        value = datavalue.ToString();
-                                    }
-                                    else
-                                    {
-                                        if (datavalue != null)
-                                        {
-                                            value = string.Format("{0:" + datafield.Format + "}", datavalue);
-                                        }
-                                        else
-                                        {
-                                            value = "";
-                                        }
-                                    }
-
-
-                                    return new Label()
-                                    {
-                                        Alignment = datafield.Alignment,
-                                        BackColor = datafield.BackColor,
-                                        Bold = datafield.Bold,
-                                        Borders = datafield.Borders,
-                                        Color = datafield.Color,
-                                        FontFamily = datafield.FontFamily,
-                                        FontSize = datafield.FontSize,
-                                        Italic = datafield.Italic,
-                                        Value = value
-                                    };
-                                }
-                                return obj;
-                            });
-                            return new ReportRow()
-                            {
-                                BackColor = row.BackColor,
-                                Objects = newobjs.ToList()
-                            };
-                        }));
+                        RenderRows(section.Rows.Select(row => row.ParseDataFields(datarow)));
                     }
                 }
             }
