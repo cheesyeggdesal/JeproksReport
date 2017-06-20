@@ -10,23 +10,20 @@ namespace JeproksReport
     public class ReportTemplate
     {
         public PageOptions PageOptions { get; set; }
-        
-        
+
         public List<ReportColumn> Columns { get; set; }
 
-        private List<ReportSection> _sections;
-        public List<ReportSection> Sections
-        {
-            get
-            {
-                return this._sections;
-            }
-        }
+        public List<ReportSection> Sections { get; set; }
+        public ReportSection Header { get; set; }
 
         public ReportTemplate()
         {
             PageOptions = new PageOptions();
-            this.Columns = new List<ReportColumn>();
+        }
+
+        public void InitializeColumns(params int[] colWidths)
+        {
+            this.Columns = colWidths.Select(col => new ReportColumn(col)).ToList();
         }
 
         public ReportSection AddSection()
@@ -37,8 +34,8 @@ namespace JeproksReport
 
         public ReportSection AddSection(ReportSection section)
         {
-            if (this._sections == null) this._sections = new List<ReportSection>();
-            this._sections.Add(section);
+            if (this.Sections == null) this.Sections = new List<ReportSection>();
+            this.Sections.Add(section);
             return section;
         }
     }

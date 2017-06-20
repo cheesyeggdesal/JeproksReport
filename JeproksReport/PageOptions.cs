@@ -10,6 +10,19 @@ namespace JeproksReport
     {
         Portrait, Landscape
     }
+
+    public class PageOptions
+    {
+        public PageOrientation PageOrientation { get; set; }
+        public Margins Margins { get; set; }
+        public PageSize PageSize { get; set; }
+
+        public PageOptions()
+        {
+            this.Margins = new Margins();
+            this.PageSize = PageSize.A4;
+        }
+    }
     public class Margins
     {
         public double Top { get; set; }
@@ -25,14 +38,8 @@ namespace JeproksReport
             this.Left = 30;
         }
     }
-    public class PageOptions
+    public enum PageSize
     {
-        public PageOrientation PageOrientation { get; set; }
-        
-        public Margins Margins { get; set; }
-        public PageOptions()
-        {
-            this.Margins = new Margins();
-        }
+        A4, Letter
     }
 }

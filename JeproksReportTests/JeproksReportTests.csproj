@@ -60,13 +60,13 @@
       <Project>{138d71e0-b2ae-45b3-8c70-aa7659da978a}</Project>
       <Name>ExcelWriter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\iTextSharpWriter\iTextSharpWriter.csproj">
+      <Project>{cec7fe81-3380-4e3a-a038-7bfa85e432d9}</Project>
+      <Name>iTextSharpWriter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JeproksReport\JeproksReport.csproj">
       <Project>{ef1f1fab-e30c-4c47-b26a-8261cdd8c28e}</Project>
       <Name>JeproksReport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PDFsharp\PDFSharpWriter.csproj">
-      <Project>{15e7bee9-25c8-4709-b559-9451916c9646}</Project>
-      <Name>PDFSharpWriter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

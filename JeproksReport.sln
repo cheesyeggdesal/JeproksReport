@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeproksReport", "JeproksReport\JeproksReport.csproj", "{EF1F1FAB-E30C-4C47-B26A-8261CDD8C28E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Writers", "Writers", "{A204C169-93EF-42B4-A358-A78814F5F196}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFSharpWriter", "PDFsharp\PDFSharpWriter.csproj", "{15E7BEE9-25C8-4709-B559-9451916C9646}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeproksReportTests", "JeproksReportTests\JeproksReportTests.csproj", "{112E441C-B7D9-4EC0-A3CC-91BF357D6060}"
 EndProject
@@ -17,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTextSharpWriter", "iTextSharpWriter\iTextSharpWriter.csproj", "{CEC7FE81-3380-4E3A-A038-7BFA85E432D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +28,6 @@ Global
 		{EF1F1FAB-E30C-4C47-B26A-8261CDD8C28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF1F1FAB-E30C-4C47-B26A-8261CDD8C28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF1F1FAB-E30C-4C47-B26A-8261CDD8C28E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15E7BEE9-25C8-4709-B559-9451916C9646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15E7BEE9-25C8-4709-B559-9451916C9646}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15E7BEE9-25C8-4709-B559-9451916C9646}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15E7BEE9-25C8-4709-B559-9451916C9646}.Release|Any CPU.Build.0 = Release|Any CPU
 		{112E441C-B7D9-4EC0-A3CC-91BF357D6060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{112E441C-B7D9-4EC0-A3CC-91BF357D6060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{112E441C-B7D9-4EC0-A3CC-91BF357D6060}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,12 +36,16 @@ Global
 		{138D71E0-B2AE-45B3-8C70-AA7659DA978A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{138D71E0-B2AE-45B3-8C70-AA7659DA978A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{138D71E0-B2AE-45B3-8C70-AA7659DA978A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEC7FE81-3380-4E3A-A038-7BFA85E432D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC7FE81-3380-4E3A-A038-7BFA85E432D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC7FE81-3380-4E3A-A038-7BFA85E432D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC7FE81-3380-4E3A-A038-7BFA85E432D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{15E7BEE9-25C8-4709-B559-9451916C9646} = {A204C169-93EF-42B4-A358-A78814F5F196}
 		{138D71E0-B2AE-45B3-8C70-AA7659DA978A} = {A204C169-93EF-42B4-A358-A78814F5F196}
+		{CEC7FE81-3380-4E3A-A038-7BFA85E432D9} = {A204C169-93EF-42B4-A358-A78814F5F196}
 	EndGlobalSection
 EndGlobal

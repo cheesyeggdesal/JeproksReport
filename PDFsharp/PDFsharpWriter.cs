@@ -49,6 +49,7 @@ namespace JeproksReport.PDFSharp
             this._currentXPos = this._template.PageOptions.Margins.Left;
             if (this._currentGraphics != null) this._currentGraphics.Dispose();
             this._currentGraphics = XGraphics.FromPdfPage(this._currentPage);
+            RenderSection(this._template.PageHeader);
         }
 
         void RenderSection(ReportSection section)
@@ -101,6 +102,7 @@ namespace JeproksReport.PDFSharp
                     }).Max();
                 }
 
+                
                 if (this._currentYPos + highesttHeight > this._currentPage.Height - this._template.PageOptions.Margins.Bottom)
                 {
                     addPage();
