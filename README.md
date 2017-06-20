@@ -1,16 +1,13 @@
 # Basic Usage
 ```csharp
 //generate report template
-ReportTemplate productListTemplate()
+ReportTemplate generateSimpleTemplate()
 {
     var template = new ReportTemplate();
+    template.InitializeColumns(75, 300, 50, 100);
 
-    template.Columns.Add(new ReportColumn(75));
-    template.Columns.Add(new ReportColumn(300));
-    template.Columns.Add(new ReportColumn(50));
-    template.Columns.Add(new ReportColumn(100));
-
-    var header = template.AddSection();
+    var header = new ReportSection();
+    template.Header = header;
     var currentrow = header.AddRow();
     currentrow.AddLabel("Product List", new Font("Arial", 12, FontStyle.Bold));
             
@@ -19,22 +16,29 @@ ReportTemplate productListTemplate()
     currentrow.AddLabel(string.Format("{0:MMM dd, yyyy}", DateTime.Now));
 
     header.AddRow().AddLabel(" "); //blank row
-
-    Font tableheaderfont = new Font("Arial", 9, FontStyle.Bold);
+            
     currentrow = header.AddRow();
-    currentrow.AddLabel("Product Id", tableheaderfont, "White", "#0063B1");
-    currentrow.AddLabel("Product Name", tableheaderfont, "White", "#0063B1");
-    currentrow.AddLabel("Quantity", tableheaderfont, "White", "#0063B1", StringAlignment.Far);
-    currentrow.AddLabel("Price", tableheaderfont, "White", "#0063B1", StringAlignment.Far);
+    var headerStyle = new TextBaseStyle()
+    {
+        Color = "White",
+        BackColor = "#0063B1",
+        Bold = true
+    };
+
+    currentrow.AddLabel("Product Id", headerStyle);
+    currentrow.AddLabel("Product Name", headerStyle);
+    currentrow.AddLabel("Quantity", headerStyle.Align(StringAlignment.Far));
+    currentrow.AddLabel("Price", headerStyle.Align(StringAlignment.Far));
 
     var details = template.AddSection();
     details.DataSource = "products";
 
     currentrow = details.AddRow();
+    var numberStyle = new TextBaseStyle() { Alignment = StringAlignment.Far };
     currentrow.AddDataField("ProductId");
     currentrow.AddDataField("ProductName");
-    currentrow.AddDataField("Quantity", format: "N2", alignment: StringAlignment.Far);
-    currentrow.AddDataField("Price", format: "N2", alignment: StringAlignment.Far);
+    currentrow.AddDataField("Quantity", numberStyle, "N2");
+    currentrow.AddDataField("Price", numberStyle, "N2");
     return template;
 }
 
